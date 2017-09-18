@@ -8,15 +8,18 @@
 
 #include "dictionaryADT.h"
 #include "bag.h"
+#include <ctime>
 
 #ifndef dictionary_h
 #define dictionary_h
 
 template <typename Key, typename E>
-class  BDictionary: public Dictionary<Key, E> {
+class  dictionary: public Dictionary<Key, E> {
+    bag<KVpair<Key, E>> theBag;
+    
 public:
-    BDictionary() {}          // Default constructor
-    ~BDictionary() {} // Base destructor
+    dictionary() {}          // Default constructor
+    ~dictionary() {} // Base destructor
     
     // Reinitialize dictionary
     void clear()
@@ -30,7 +33,8 @@ public:
     // Return true if insert is successful and false otherwise
     bool insert(const Key& k, const E& e)
     {
-        
+        KVpair<Key, E> temp(k,e);
+        theBag.addItem(temp);
     }
     
     // Looks for a record using the key and if found does the following:
@@ -40,7 +44,13 @@ public:
     // If the record is not found the function returns false.
     bool remove(const Key& k, E& rtnVal)
     {
-        
+        KVpair<Key, E> temp(k,rtnVal);
+        if (theBag.remove(temp)) {
+            rtnVal = temp.value();
+            return true;
+        }
+        else
+            return false;
     }
     
     // Takes an arbitrary record from the dictionary and does the following:
@@ -50,6 +60,8 @@ public:
     // If the dictionary is empty the function returns false.
     bool removeAny(E& returnValue)
     {
+        srand(time(0));
+        int random = rand() % 10;
         
     }
     
