@@ -12,18 +12,28 @@
 #ifndef bag_h
 #define bag_h
 
-template <typename E>
-class bag: public Bag<E>
+template <typename E, typename Key, typename V>
+class ABag: public Bag<E>
 {
+    KVpair<Key, V> pairArray[10];
+    int top,
+    current;
+    const int arraySize = 10;
 public:
-    bag() {}            // base constructor
-    ~bag() {}   // base destructor
+    ABag() {top = current = -1;}            // base constructor
+    ~ABag() {emptyBag();}   // base destructor
     
     // Insert a new item into the bag -- return false if fails and true if
     // successful
     bool addItem(const E& item)
     {
-        
+        if (top != 9) {
+            pairArray[top] = item;
+            top++;
+            return true;
+        }
+        else
+            return false;
     }
     
     // Looks for 'item' in the bag and if found updates 'item' with the
@@ -31,7 +41,15 @@ public:
     // and the method returns false.
     bool remove(E& item)
     {
-        
+        if (top != -1 && find(item)) {
+            for (int i = current; i != top; i++) {
+                pairArray[i] = pairArray[i+1];
+            }
+            top--;
+            return true;
+        }
+        else
+            return false;
     }
     
     // Removes the top record from the bag, puts it in returnValue, and
@@ -39,7 +57,12 @@ public:
     // function returns false and returnValue remains unchanged.
     bool removeTop(E& returnValue)
     {
-        
+        if (top != -1) {
+            returnValue = pairArray[top--];
+            return true;
+        }
+        else
+            return false;
     }
     
     // Finds the record using returnValue and if the record is found updates
@@ -48,7 +71,17 @@ public:
     // except that the found record is not removed from the bag.
     bool find(E& returnValue) const
     {
-        
+        if (top != -1) {
+            for (int i = top; i != -1; i--) {
+                if (pairArray[i].key() == returnValue.key()) {
+                    returnValue.value() = pairArray.value();
+                    current = i;
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
     }
     
     // Inspect the top of the bag.  If the bag is empty return
@@ -56,31 +89,37 @@ public:
     // 'item' with the contents of the bag.
     bool inspectTop(E& item) const
     {
-        
+        if (top == -1) {
+            return false;
+        }
+        else{
+            item = pairArray[top];
+            return true;
+        }
     }
     
     // empties the bag
     void emptyBag()
     {
-        
+        top = -1;
     }
     
     // use the += operator to add an item to the bag
     bool operator+=(const E& addend)
     {
-        
+        return addItem(addend);
     }
     
     // get the size of the bag
     int size() const
     {
-        
+        return top + 1;
     }
     
     // get the capacity of the bag
     int bagCapacity() const
     {
-        
+        return arraySize;
     }
 };
 
