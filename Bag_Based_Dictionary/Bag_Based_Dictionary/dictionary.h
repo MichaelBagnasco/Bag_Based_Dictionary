@@ -8,6 +8,7 @@
 
 #include "dictionaryADT.h"
 #include "bag.h"
+#include <ctime>
 
 #ifndef dictionary_h
 #define dictionary_h
@@ -15,13 +16,13 @@
 template <typename Key, typename E>
 class  dictionary: public Dictionary<Key, E> {
     bag<KVpair<Key, E>> theBag;
-    KVpair<Key, E> temp;
+    
 public:
     dictionary() {}          // Default constructor
-    virtual ~dictionary() {} // Base destructor
+    ~dictionary() {} // Base destructor
     
     // Reinitialize dictionary
-    virtual void clear()
+    void clear()
     {
         
     }
@@ -30,9 +31,10 @@ public:
     // k: The key for the record being inserted.
     // e: The record being inserted.
     // Return true if insert is successful and false otherwise
-    virtual bool insert(const Key& k, const E& e)
+    bool insert(const Key& k, const E& e)
     {
-        
+        KVpair<Key, E> temp(k,e);
+        theBag.addItem(temp);
     }
     
     // Looks for a record using the key and if found does the following:
@@ -40,9 +42,15 @@ public:
     // - removes the record from the dictionary
     // - returns true
     // If the record is not found the function returns false.
-    virtual bool remove(const Key& k, E& rtnVal)
+    bool remove(const Key& k, E& rtnVal)
     {
-        
+        KVpair<Key, E> temp(k,rtnVal);
+        if (theBag.remove(temp)) {
+            rtnVal = temp.value();
+            return true;
+        }
+        else
+            return false;
     }
     
     // Takes an arbitrary record from the dictionary and does the following:
@@ -50,8 +58,10 @@ public:
     // - removes the record from the dictionary
     // - returns true
     // If the dictionary is empty the function returns false.
-    virtual bool removeAny(E& returnValue)
+    bool removeAny(E& returnValue)
     {
+        srand(time(0));
+        int random = rand() % 10;
         
     }
     
@@ -59,13 +69,13 @@ public:
     // - updates the E& returnValue
     // - returns true
     // If the record is not found the function returns false.
-    virtual bool find(const Key& k, E& returnValue) const
+    bool find(const Key& k, E& returnValue) const
     {
         
     }
     
     // Return the number of records in the dictionary.
-    virtual int size()
+    int size()
     {
         
     }
