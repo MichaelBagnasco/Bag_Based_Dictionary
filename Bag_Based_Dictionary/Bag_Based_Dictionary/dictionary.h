@@ -14,6 +14,8 @@
 
 template <typename Key, typename E>
 class  dictionary: public Dictionary<Key, E> {
+    bag<KVpair<Key, E>> theBag;
+    KVpair<Key, E> temp;
 public:
     dictionary() {}          // Default constructor
     virtual ~dictionary() {} // Base destructor
