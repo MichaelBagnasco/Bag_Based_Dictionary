@@ -14,17 +14,17 @@
 #define dictionary_h
 
 template <typename Key, typename E>
-class  dictionary: public Dictionary<Key, E> {
-    bag<KVpair<Key, E>> theBag;
+class  BDictionary: public Dictionary<Key, E> {
+    ABag<KVpair<Key, E>, Key, E> theBag;
     
 public:
-    dictionary() {}          // Default constructor
-    ~dictionary() {} // Base destructor
+    BDictionary() {}          // Default constructor
+    ~BDictionary() {} // Base destructor
     
     // Reinitialize dictionary
     void clear()
     {
-        
+        theBag.emptyBag();
     }
     
     // Insert a record
@@ -34,7 +34,7 @@ public:
     bool insert(const Key& k, const E& e)
     {
         KVpair<Key, E> temp(k,e);
-        theBag.addItem(temp);
+        theBag += temp;
     }
     
     // Looks for a record using the key and if found does the following:
@@ -60,9 +60,14 @@ public:
     // If the dictionary is empty the function returns false.
     bool removeAny(E& returnValue)
     {
-        srand(time(0));
-        int random = rand() % 10;
-        
+        if (theBag.size() != 0) {
+            srand(time(0));
+            int random = rand() % theBag.size();
+            theBag.setCurrent(random);
+            return theBag.removeAtCurrent(returnValue);
+        }
+        else
+            return false;
     }
     
     // Looks for a record using the key and if found does the following:
@@ -71,13 +76,20 @@ public:
     // If the record is not found the function returns false.
     bool find(const Key& k, E& returnValue) const
     {
+        KVpair<Key, E> temp(k,returnValue);
+        if (theBag.find(temp)){
+            returnValue = temp.value();
+            return true;
+        }
+        else
+            return false;
         
     }
     
     // Return the number of records in the dictionary.
     int size()
     {
-        
+        return theBag.size();
     }
 };
 

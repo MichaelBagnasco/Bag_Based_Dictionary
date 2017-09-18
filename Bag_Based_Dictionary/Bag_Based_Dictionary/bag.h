@@ -121,6 +121,21 @@ public:
     {
         return arraySize;
     }
+    
+    void setCurrent(int a)
+    {
+        current = a;
+    }
+    
+    bool removeAtCurrent(E& rtnVal)
+    {
+        if (top != -1) {
+            rtnVal = pairArray[current];
+            return true;
+        }
+        else
+            return false;
+    }
 };
 
 #endif /* bag_h */
