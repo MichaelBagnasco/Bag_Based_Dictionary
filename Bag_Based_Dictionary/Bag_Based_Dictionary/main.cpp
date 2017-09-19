@@ -11,11 +11,18 @@
 
 
 int main() {
+    // First Dictionary
     BDictionary<int, string> dict1;
     KVpair<int, string> temp;
     string removedValue,
-    foundValue;
-    string  input[] = {"Test", "your", "bag", "and", "dictionary", "implementations", "with", "the", "following", "template"};
+    foundValue,
+    input[] = {"Test", "your", "bag", "and", "dictionary", "implementations", "with", "the", "following", "template"};
+    
+    // Second Dictionary
+    BDictionary<string, int> dict2;
+    KVpair<string, int> temp2;
+    int foundInt;
+    string keyIn[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
     
     
     
@@ -35,7 +42,7 @@ int main() {
     cout << "There are currently " << dict1.size() << " records in the dictionary" << endl << endl;
     
     cout << "Removing the third record" << endl;
-    dict1.remove(3, removedValue);
+    dict1.remove(2, removedValue);
     cout << "Removed record: " << removedValue << endl << endl;
     
     cout << "Removing a random record" << endl;
@@ -43,7 +50,7 @@ int main() {
     cout << "Removed Record: " << removedValue << endl << endl;
     
     cout << "Finding the fifth record without removing it" << endl;
-    dict1.find(5, foundValue);
+    dict1.find(4, foundValue);
     cout << "The fifth record is: " << foundValue << endl << endl;
     
     cout << "The current amount of records in the dictionary is " << dict1.size() << endl << endl;
@@ -52,6 +59,20 @@ int main() {
     dict1.clear();
     
     
+    
+    // Demonstrating the second dictionary
+    cout << "Inserting sample data in a dictionary that can contain " << dict2.capacity() << " records." << endl;
+    cout << "The inserted records are:" << endl;
+
+    for (int i = 0; i != 10; i++) {
+        dict2.insert(keyIn[i],i*10);
+        cout << keyIn[i] << ": " << i*10 << endl;
+    }
+    cout << endl;
+    
+    cout << "Finding the 7th record" << endl;
+    dict2.find("G", foundInt);
+    cout << "The seventh record is: " << foundInt << endl << endl << endl;
     
     return 0;
 }

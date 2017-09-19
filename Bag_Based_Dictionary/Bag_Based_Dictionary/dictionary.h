@@ -33,10 +33,8 @@ public:
     // Return true if insert is successful and false otherwise
     bool insert(const Key& k, const E& e)
     {
-        
         KVpair<Key, E> temp(k,e);
         return theBag += temp;
-
     }
     
     // Looks for a record using the key and if found does the following:

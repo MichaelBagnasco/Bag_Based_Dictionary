@@ -28,8 +28,7 @@ public:
     bool addItem(const E& item)
     {
         if (top != 9) {
-            pairArray[top] = item;
-            top++;
+            pairArray[++top] = item;
             return true;
         }
         else
