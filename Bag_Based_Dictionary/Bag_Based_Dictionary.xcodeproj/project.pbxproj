@@ -62,12 +62,12 @@
 		A6613D2B1F6F14C500538AF3 /* Bag_Based_Dictionary */ = {
 			isa = PBXGroup;
 			children = (
-				A6613D331F6F155700538AF3 /* bagADT.h */,
-				A6613D351F6F155700538AF3 /* dictionaryADT.h */,
-				A6613D361F6F155700538AF3 /* kvpair.h */,
 				A6613D2C1F6F14C500538AF3 /* main.cpp */,
 				A6613D371F6F164A00538AF3 /* bag.h */,
 				A6613D381F6F165E00538AF3 /* dictionary.h */,
+				A6613D361F6F155700538AF3 /* kvpair.h */,
+				A6613D331F6F155700538AF3 /* bagADT.h */,
+				A6613D351F6F155700538AF3 /* dictionaryADT.h */,
 			);
 			path = Bag_Based_Dictionary;
 			sourceTree = "<group>";
@@ -261,6 +261,7 @@
 				A6613D321F6F14C500538AF3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

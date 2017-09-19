@@ -73,9 +73,8 @@ public:
     {
         if (top != -1) {
             for (int i = top; i != -1; i--) {
-                if (pairArray[i].key() == returnValue.key()) {
-                    returnValue.value() = pairArray.value();
-                    current = i;
+                if (pairArray[i] == returnValue) {
+                    returnValue = pairArray[i];
                     return true;
                 }
             }
@@ -131,6 +130,10 @@ public:
     {
         if (top != -1) {
             rtnVal = pairArray[current];
+            for (int i = current; i != top; i++) {
+                pairArray[i] = pairArray[i+1];
+            }
+            top--;
             return true;
         }
         else

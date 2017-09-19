@@ -33,8 +33,10 @@ public:
     // Return true if insert is successful and false otherwise
     bool insert(const Key& k, const E& e)
     {
+        
         KVpair<Key, E> temp(k,e);
-        theBag += temp;
+        return theBag += temp;
+
     }
     
     // Looks for a record using the key and if found does the following:
@@ -60,11 +62,14 @@ public:
     // If the dictionary is empty the function returns false.
     bool removeAny(E& returnValue)
     {
+        KVpair<Key, E> temp;
         if (theBag.size() != 0) {
             srand(time(0));
             int random = rand() % theBag.size();
             theBag.setCurrent(random);
-            return theBag.removeAtCurrent(returnValue);
+            theBag.removeAtCurrent(temp);
+            returnValue = temp.value();
+            return true;
         }
         else
             return false;
@@ -90,6 +95,11 @@ public:
     int size()
     {
         return theBag.size();
+    }
+    
+    int capacity()
+    {
+        return theBag.bagCapacity();
     }
 };
 
